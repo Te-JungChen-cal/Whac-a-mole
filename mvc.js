@@ -181,7 +181,6 @@ const Controller = ((view, model) => {
       (newTimer) => updateTimer(newTimer),
       () => {
         state.clearGameIntervals();
-        alert("Time is Over!");
         domSelector.startButton.disabled = false;
       }
     );
@@ -201,16 +200,12 @@ const Controller = ((view, model) => {
       // Clicking snake ends game immediately
       state.clearGameIntervals(); // Stop all game timers
 
-      // Make every block a snake before alert
+      // Make every block a snake before stopping the game
       state.board.forEach((b) => (b.hasSnake = true));
       createBoard(state.board); // Update UI first
 
-      // Delay alert so user sees all snakes appear
-      setTimeout(() => {
-        alert("Game Over! You clicked the snake!");
-        domSelector.startButton.disabled = false;
-      }, 500); // 0.5s delay for smooth visual update
-
+      // No alert, game just stops
+      domSelector.startButton.disabled = false;
       return;
     }
 
